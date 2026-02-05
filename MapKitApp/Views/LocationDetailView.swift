@@ -11,6 +11,8 @@ import MapKit
 struct LocationDetailView: View {
     
     @Environment(LocationsViewModel.self) var vm
+    @Environment(\.horizontalSizeClass) private var hSizeClass
+    // on iPad the horizontal size class is usually .regular
     
     let location: Location
     
@@ -55,7 +57,11 @@ extension LocationDetailView {
                     .scaledToFill()
                 // not scaled to fit
                     //.frame(height: 300)
-                    .frame(width: .infinity)
+                    //.frame(width: .infinity)
+                    //.frame(width: UIDevice.current.userInterfaceIdiom == .pad ? nil : .infinity)
+                
+                // IPAD VS IPHONE --------------------
+                    .frame(width: hSizeClass == .regular ? nil : .infinity)
                     .clipped()
             }
         }

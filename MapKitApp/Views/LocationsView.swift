@@ -25,6 +25,7 @@ struct LocationsView: View {
     //@State private var vm = LocationsViewModel()
     //@Environment private var vm: LocationsViewModel
     @Environment(LocationsViewModel.self) var vm
+    let maxWidthForIpad: CGFloat = 700
     // span is how zoomed in or zoomed out you want map to be. 0.1 fairly zoomed in
     
     // Old version
@@ -93,6 +94,7 @@ struct LocationsView: View {
             VStack(spacing: 0) {
                 header
                     .padding()
+                    .frame(maxWidth: maxWidthForIpad)
                 
                 Spacer()
                 
@@ -163,7 +165,11 @@ extension LocationsView {
                     LocationPreviewView(location: location)
                         .shadow(color: Color.black.opacity(0.3), radius: 20)
                         .padding()
+                        .frame(maxWidth: maxWidthForIpad)
+                        .frame(maxWidth: .infinity)
+                        //.transition(AnyTransition.scale.animation(.easeInOut)) or opacity instead of scale to fade in and out. scale bounces inward and outward
                         .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                    // trailing leading edge of object, now make the edge of obj back to edge of screen. added second frame with maxwidth infinity. making transition go all the way to the edges of screen.
                 }
             }
         }

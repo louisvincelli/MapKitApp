@@ -36,6 +36,11 @@ import MapKit
         // get all locations from data service
         let locations = LocationsDataService.locations
         self.locations = locations
+        // Start with empty if API
+        
+        //self.locaitons = []
+        //self.downloadLoations()
+        
         // first location from first data service array
         // explicit unwrap will never fail because hard coded data and we'll get at least 1 item inside the array.
         let first = locations.first!
@@ -48,6 +53,13 @@ import MapKit
             )
         )
     }
+    
+    // If using third party API
+    // fun downloadLocations() {
+    //   call it up top in init ^^^
+    // then append to Location array. all based of array of var locations: [Location]
+    //}
+    
     private func updateMapRegion(location: Location) {
         withAnimation(.easeInOut) {
             mapRegion = .region(
